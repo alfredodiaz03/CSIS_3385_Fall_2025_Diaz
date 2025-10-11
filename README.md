@@ -19,23 +19,6 @@ Features
 
 All routes return the proper HTTP status codes (200, 201, 404).
 
-How to Run
-docker build -t flask-puzzle-server .
-docker run -p 5001:5000 flask-puzzle-server
-
-How to Test (PowerShell)
-# Read (GET)
-irm http://localhost:5001/users
-
-# Create (POST)
-irm http://localhost:5001/users -Method Post -ContentType 'application/json' -Body '{"doggy":"neo","zebra42":"tr1n1ty!","kittycat":"neo@example.com","rocketShip":29}'
-
-# Update (PUT)
-irm http://localhost:5001/users/2221899 -Method Put -ContentType 'application/json' -Body '{"email":"one@example.com","age":30}'
-
-# Delete (DELETE)
-irm http://localhost:5001/users/2221899 -Method Delete
-
 Notes
 - The app runs on Docker and automatically reloads seed data from seed.json each time the container restarts.
 - Each CRUD route works individually and matches the snippets from the project instructions.
@@ -43,4 +26,3 @@ Notes
 
 Summary
 This assignment helped me understand how Flask routes connect the frontend to the backend and how each CRUD operation works in practice. It also showed me how to test endpoints safely and interpret JSON responses from an API.
-```
