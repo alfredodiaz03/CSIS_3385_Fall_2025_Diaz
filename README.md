@@ -24,5 +24,5 @@ Notes
 - Each CRUD route works individually and matches the snippets from the project instructions.
 - Data resets after each container restart (expected behavior).
 
-Summary
+Summary:
 This assignment helped me understand how Flask routes connect the frontend to the backend and how each CRUD operation works in practice. It also showed me how to test endpoints safely and interpret JSON responses from an API.
