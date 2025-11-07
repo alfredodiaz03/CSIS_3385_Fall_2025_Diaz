@@ -1,0 +1,25 @@
+
+• What were the most important changes you made to the form, and why?
+	• The form had many areas of improvement but these were the most important:
+		○ One thing I did was replace the DELETE method with method POST. This would allow the browser to actually submit payload using a support method. 
+		○ To prevent from being pushed off screen because of the CSS I made the password field visible with a real type password. This helps with usability and makes the UI less deceptive. 
+		○ Also, added required critical fields with constraints that helps block bad input before it can affect the server. In addition to that I had to add the 10 word limit, JavaScript helper, and a non-script notice that acknowledges the server has to enforce rules. 
+
+• How did you decide what validation rules to apply?
+	• To decide on what validation rules to apply I narrowed it down to five areas; username, password, age, email, and message limit. 
+	• When it comes to the password and username I used the obvious whitelist requirements. This would be a mix of upper, lower, digit, symbols, and specific lengths. 
+	• In the profile section with age and email; age is set to numeric only and has realistic bounds to avoid decimals. 
+	• For the final validation I used the message that states it’s a 10 word limit and it will display the remaining count along with a block if they try to go over the limit. 
+
+• What is one security issue you addressed, and how did your change help prevent it?
+	• The security issue I address in this project was the hidden password field. I think off screen inputs can be risky and misleading. So I figured it was better to have a visible proper password input. Also, I used textContent only to help prevent DOM based XSS. 
+
+• (Optional) What would you do differently if this were a live production form?
+	• I would use hash passwords with more modern algorithms, add CSRF tokens, and possible a server side that does validation and logging. I also think adding a strong context security policy with automated test for validation would be good to have. 
+
+
+Ethical Integrity Declaration:
+
+I, Alfredo Diaz, affirm that all work submitted in this case study is my own. I have not used AI tools, AI-generated text, or AI-based writing assistants (such as ChatGPT, Gemini, Grammarly AI, etc.) in the creation of this assignment. I understand that using AI tools for this project violates the spirit of ethical learning and may result in academic consequences.
+
+Signed: Alfredo Diaz  Date: 11/6/25
