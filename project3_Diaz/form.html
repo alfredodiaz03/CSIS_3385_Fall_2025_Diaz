@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project 3 – Secure User Form</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Secure form with HTML5 validation and basic client-side protections." />
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Create User (Secure)</h2>
+
+  <!-- NOTE: For testing payloads you may temporarily set action to https://httpbin.org/post -->
+  <form id="userForm" action="/users" method="POST" autocomplete="on">
+    <fieldset>
+      <legend>Account Details</legend>
+
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="e.g., alfie_diaz"
+        minlength="3"
+        maxlength="20"
+        pattern="^[A-Za-z0-9_.-]{3,20}$"
+        title="3–20 characters: letters, numbers, underscore, dot, or hyphen."
+        autocomplete="username"
+        required
+      />
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="At least 8 characters, mix of types"
+        minlength="8"
+        maxlength="64"
+        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,64}"
+        title="8–64 chars, include upper, lower, number, and symbol."
+        autocomplete="new-password"
+        required
+      />
+    </fieldset>
+
+    <fieldset>
+      <legend>Profile</legend>
+
+      <label for="age">Age</label>
+      <input
+        type="number"
+        id="age"
+        name="age"
+        placeholder="e.g., 25"
+        inputmode="numeric"
+        min="13"
+        max="120"
+        step="1"
+        required
+      />
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="you@example.com"
+        maxlength="254"
+        autocomplete="email"
+        required
+      />
+    </fieldset>
+
+    <fieldset>
+      <legend>Message</legend>
+
+      <label for="message">Message (10 words or less)</label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Keep it short and clear (10 words max)"
+        rows="4"
+        maxlength="500"
+        aria-describedby="messageHelp messageError"
+        required
+      ></textarea>
+      <small id="messageHelp">Words remaining: <span id="wordRemaining">10</span></small>
+      <div id="messageError" class="error" role="alert" aria-live="polite"></div>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <noscript>
+    <p class="error">JavaScript is disabled. Word limit (10) won’t be enforced on the client. The server must validate.</p>
+  </noscript>
+</div>
+
+<script>
+  // Limit message to 10 words (client-side help). Server-side validation is still required in real apps.
+  (function () {
+    const textarea = document.getElementById('message');
+    const remaining = document.getElementById('wordRemaining');
+    const error = document.getElementById('messageError');
+    const form = document.getElementById('userForm');
+
+    function countWords(str) {
+      const words = (str.trim().match(/\b\w+('\w+)?\b/g) || []);
+      return words.length;
+    }
+
+    function updateWordCount() {
+      const words = countWords(textarea.value);
+      const left = Math.max(0, 10 - words);
+      remaining.textContent = left;
+      if (words > 10) {
+        error.textContent = "Please keep the message to 10 words or fewer.";
+      } else {
+        error.textContent = "";
+      }
+    }
+
+    textarea.addEventListener('input', updateWordCount);
+    form.addEventListener('submit', function (e) {
+      if (countWords(textarea.value) > 10) {
+        e.preventDefault();
+        error.textContent = "Message exceeds 10 words. Please shorten it.";
+        textarea.focus();
+      }
+    });
+
+    updateWordCount();
+  })();
+</script>
+
+</body>
+</html>
