@@ -127,7 +127,7 @@
     form.addEventListener('submit', function (e) {
       if (countWords(textarea.value) > 10) {
         e.preventDefault();
-        error.textContent = "Message exceeds 10 words. Please shorten it.";
+        error.textContent = "Warning - Message exceeds 10 words. Please shorten it.";
         textarea.focus();
       }
     });
